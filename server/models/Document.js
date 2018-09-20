@@ -18,6 +18,7 @@ const documentSchema = new Schema({
   fileUrl: {
     type: String
   },
+  public_id: String,
   randomUrl: {
     type: String
   },

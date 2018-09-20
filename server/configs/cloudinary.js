@@ -14,9 +14,9 @@ var storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "my-app-files",
   allowedFormats: ["jpg", "png", "pdf"],
-  filename: function(req, file, cb) {
-    cb(null, "my-file-name");
-  },
+  // filename: function(req, file, cb) {
+  //   cb(null, "my-file-name");
+  // },
   transformation: [
     {
       angle: 0

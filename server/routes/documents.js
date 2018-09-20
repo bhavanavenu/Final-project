@@ -6,10 +6,16 @@ var randomstring = require("randomstring");
 const uploadCloud = require("../configs/cloudinary");
 
 //create random url
-router.post("/", (req, res, next) => {
+router.post("/", uploadCloud.single("doc"), (req, res, next) => {
   let { label, type, text } = req.body;
+  let public_id = "";
+  let fileUrl = "";
+  if (req.file) {
+    public_id = req.file.public_id;
+    fileUrl = req.file.secure_url;
+  }
   let randomUrl = randomstring.generate();
-  Document.create({ label, type, text, randomUrl })
+  Document.create({ label, type, text, randomUrl, fileUrl, public_id })
     .then(document => {
       res.json(document);
     })
@@ -34,7 +40,7 @@ router.get("/:id/:random", (req, res, next) => {
 // router.delete("/:id/:random");
 
 // //delete docs if he uploads wrong docs
-router.delete("delete/:id", (req, res, next) => {
+router.delete("/:id", (req, res, next) => {
   let docId = req.params.id;
 
   Document.findByIdAndRemove(docId)
