@@ -2,34 +2,49 @@ const express = require("express");
 const Document = require("../models/Document");
 
 const router = express.Router();
+var randomstring = require("randomstring");
+const uploadCloud = require("../configs/cloudinary");
 
-//create docs
-router.get("/", (req, res, next) => {
-  res.json({
-    message: "hi"
-  });
-});
-
-//file upload
+//create random url
 router.post("/", (req, res, next) => {
   let { label, type, text } = req.body;
-  Document.create({ label, type, text })
+  let randomUrl = randomstring.generate();
+  Document.create({ label, type, text, randomUrl })
     .then(document => {
       res.json(document);
     })
     .catch(err => next(err));
 });
 
-//generate get document list
-// router.post("/vaults");
-
 // //get docs from the other user
-// router.get("/:id/:random");
+router.get("/:id/:random", (req, res, next) => {
+  let docId = req.params.id;
+  let randomUrl = randomstring.generate();
+  Document.findById(docId)
+    .then(docId, randomUrl => {
+      res.json({
+        success: true,
+        randomUrl
+      });
+    })
+    .catch(err => next(err));
+});
 
 // //delete document from db
 // router.delete("/:id/:random");
 
 // //delete docs if he uploads wrong docs
-// router.delete("/delete/:id");
+router.delete("delete/:id", (req, res, next) => {
+  let docId = req.params.id;
+
+  Document.findByIdAndRemove(docId)
+    .then(document => {
+      res.json({
+        success: true,
+        document
+      });
+    })
+    .catch(err => next(err));
+});
 
 module.exports = router;

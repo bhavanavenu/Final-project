@@ -12,8 +12,8 @@ const documentSchema = new Schema({
     enum: ["TEXT", "FILE"]
   },
   text: {
-    type: String
-    //required: true
+    type: String,
+    required: true
   },
   fileUrl: {
     type: String
