@@ -7,7 +7,7 @@ import {
   NavItem,
   Container
 } from "reactstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default class IronNavbar extends Component {
   constructor(props) {
