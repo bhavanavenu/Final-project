@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../../api";
 
-class Home extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,11 +10,12 @@ class Home extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="Home">
+        <h2>profile</h2>
         <p>This is a sample project with the MERN stack</p>
       </div>
     );
   }
 }
 
-export default Home;
+export default Profile;
