@@ -24,6 +24,7 @@ export default {
   // },
 
   postDocuments(data) {
+    // add logic to send data to backend to create a document
     return service
       .post("/documents", data)
       .then(res => res.data)
@@ -33,6 +34,13 @@ export default {
   getProfile() {
     return service
       .get("/profile")
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  getDelete(id) {
+    return service
+      .get("/documents" + id)
       .then(res => res.data)
       .catch(errHandler);
   },
@@ -58,6 +66,7 @@ export default {
   },
 
   logout() {
+    console.log("INSIDE LOGOUT");
     return service.get("/logout").then(res => {
       localStorage.removeItem("user");
     });
@@ -75,6 +84,7 @@ export default {
   // },
 
   isLoggedIn() {
+    console.log(localStorage.getItem("user") != null);
     return localStorage.getItem("user") != null;
   },
 

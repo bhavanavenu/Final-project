@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import api from "../../api";
+import NavHead from "../pages/NavHead";
+import Upload from "../pages/Upload";
+import "bootstrap/dist/css/bootstrap.min.css";
+import $ from "jquery";
+import Popper from "popper.js";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 class Home extends Component {
   constructor(props) {
@@ -11,7 +17,8 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <p>This is a sample project with the MERN stack</p>
+        <h1>home - upload</h1>
+        <Upload />
       </div>
     );
   }

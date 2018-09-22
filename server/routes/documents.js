@@ -5,7 +5,7 @@ const router = express.Router();
 var randomstring = require("randomstring");
 const uploadCloud = require("../configs/cloudinary");
 
-//create random url
+//create random url, connected users will be able to see saved items
 router.post("/", uploadCloud.single("doc"), (req, res, next) => {
   let { label, type, text } = req.body;
   let public_id = "";
