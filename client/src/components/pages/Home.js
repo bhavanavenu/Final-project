@@ -17,6 +17,23 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <div id="main">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>What is it?</h3>
+                <p style={{ textAlign: "center" }}>
+                  If you need to send a password or some other form of simple
+                  but sensitive information to someone you can not send it over
+                  IM or email. These methods are not secure as anyone with
+                  little knowledge can intercept this information during
+                  transmission. Using 1ty.me as the "middle man" you can safely
+                  and securely transfer this data to your recipient.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         <h1>home - upload</h1>
         <Upload />
       </div>
