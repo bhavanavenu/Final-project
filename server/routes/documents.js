@@ -7,12 +7,33 @@ const uploadCloud = require("../configs/cloudinary");
 
 const { createAnonymousUserIfNotLoggedIn } = require("../middlewares");
 
+router.get("/:id", (req, res) => {
+  Document.findById(req.params.id).then(doc => {
+    res.json(doc);
+  });
+});
+
 router.post("/", createAnonymousUserIfNotLoggedIn, (req, res, next) => {
   Document.create({ _owner: req.user._id })
     .then(doc => {
       res.json(doc);
     })
     .catch(err => next(err));
+});
+
+//update doc
+router.patch("/:id", uploadCloud.single("file"), (req, res, next) => {
+  let { label, type, text } = req.body;
+  let fileUrl = req.file ? req.file.secure_url : "";
+  const update = { fileUrl, label, type, text };
+  Document.findByIdAndUpdate(req.params.id, update)
+    .then(updated => {
+      res.json({
+        message: "Documents were updated successfully",
+        updated
+      });
+    })
+    .catch(error => next(error));
 });
 
 //create random url, connected users will be able to see saved items

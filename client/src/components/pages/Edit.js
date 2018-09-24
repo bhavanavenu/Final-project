@@ -6,24 +6,41 @@ class Edit extends React.Component {
     super(props);
     this.state = {
       file: null,
+      fileUrl: "",
       label: "",
       type: "",
-      text: ""
+      text: "",
+      alert: ""
     };
     this.handleFile = this.handleFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    api.postDocument(this.props.match.params.id).then(res => {
-      this.setState({
-        file: res.file,
-        label: res.label,
-        type: res.type,
-        text: res.text
-      });
-    });
+    let docId = this.props.match.params.id;
+
+    api
+      .getDocument(docId)
+      .then(doc => {
+        this.setState({
+          fileUrl: doc.fileUrl,
+          label: doc.label,
+          type: doc.type,
+          text: doc.text
+        });
+      })
+      // api.updateDocument(this.props.match.params.id).then(res => {
+      //   console.log("Document from db -->", res);
+      //   this.setState({
+      //     file: res.file,
+      //     label: res.label,
+      //     type: res.type,
+      //     text: res.text
+      //   });
+      // });
+      .catch(err => console.log(err));
   }
 
   handleChange(event) {
@@ -38,18 +55,40 @@ class Edit extends React.Component {
     });
   }
 
-  handleUserUpdate(event) {
+  handleSubmit(event) {
     event.preventDefault();
     let updates = { ...this.state };
     api.updateDocument(this.props.match.params.id, updates).then(res => {
-      this.props.history.push("/:id");
+      console.log("res", res);
+      console.log("res.data", res.data);
+
+      // TODO: save a state.alert
+      setTimeout(
+        {
+          // TODO: remove the state.alert
+        },
+        2000
+      );
+
+      // this.setState({
+      //   fileUrl: res.fileUrl,
+      //   label: res.label,
+      //   type: res.type,
+      //   text: res.text
+      // });
+    });
+  }
+
+  handleDelete(event) {
+    api.deleteDocument(this.props.match.params.id).then(res => {
+      this.props.history.push("/");
     });
   }
   render() {
+    console.log(this.props.location.search);
     return (
       <div>
         <h1>Document Edit</h1>
-
         <form onSubmit={this.handleSubmit}>
           <label>Label</label>
           <input
@@ -72,7 +111,7 @@ class Edit extends React.Component {
           <input
             type="radio"
             name="type"
-            value="Text"
+            value="TEXT"
             onChange={this.handleChange}
           />
           <br />
@@ -87,7 +126,8 @@ class Edit extends React.Component {
           File
           <input type="file" onChange={this.handleFile} />
           <br />
-          <button onClick={this.handleUserUpdate}>Update</button>
+          <button type="submit">Update</button>
+          <button onClick={this.handleDelete}>Delete</button>
         </form>
       </div>
     );

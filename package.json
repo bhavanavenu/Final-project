@@ -3,22 +3,12 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "preinstall": "echo --- preinstall --- && cd client && npm install && cd .. && cd server && npm install && cd ..",
-    "prestart": "echo --- prestart --- && cd client && npm run build && cd ..",
+    "preinstall": "echo --- preinstall --- && cd client && npm install && npm run build && cd .. && cd server && npm install && cd ..",
+    "start": "cd server && npm run dev",
     "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run start",
-    "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev:client": "cd client && npm run start"
   },
   "engines": {
     "node": "8.9.4"
-  },
-  "dependencies": {
-    "react-router-dom": "^4.3.1"
   }
 }

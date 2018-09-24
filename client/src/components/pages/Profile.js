@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import api from "../../api";
 import { Link } from "react-router-dom";
-import NavHead from "./NavHead";
 
 class Profile extends Component {
   constructor(props) {

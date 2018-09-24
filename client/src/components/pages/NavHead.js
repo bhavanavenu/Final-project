@@ -9,7 +9,6 @@ import {
 } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 import api from "../../api.js";
-import logo from "../../logo.svg";
 
 export default class NavHead extends Component {
   constructor(props) {
@@ -20,9 +19,11 @@ export default class NavHead extends Component {
       isOpen: false
     };
   }
+
   handleLogoutClick(e) {
     api.logout();
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen

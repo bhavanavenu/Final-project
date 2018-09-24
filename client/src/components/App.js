@@ -33,10 +33,10 @@ class App extends Component {
         <NavHead />
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/documents/:id" exact component={Edit} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
-          <Route path="/profile/:username/edit" component={Edit} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

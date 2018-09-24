@@ -1,82 +1,26 @@
-import api from "../../api";
 import React, { Component } from "react";
-import axios from "axios";
+import api from "../../api";
+import { Link } from "react-router-dom";
 
 class Upload extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      file: null,
-      label: "",
-      type: "",
-      text: ""
-    };
-    this.handleFile = this.handleFile.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    //this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
+  handleUpdate() {
+    api.postDocuments().then(res => {
+      console.log("API document sent back to client -->", res);
+      // this.props.history.push(`/documents/${res._id}/?key=word`);
     });
-  }
-
-  handleFile(event) {
-    this.setState({
-      file: event.target.files[0]
-    });
-    // api.postDocuments(this.state);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log("submit form");
   }
 
   render() {
     return (
       <div className="Upload">
-        <form onSubmit={this.handleSubmit}>
-          <label>Label</label>
-          <input
-            id="text"
-            type="text"
-            name="label"
-            value={this.state.label}
-            onChange={this.handleChange}
-          />
-          <br />
-          is file
-          <input
-            type="radio"
-            name="type"
-            value="TEXT"
-            onChange={this.handleChange}
-          />
-          <br />
-          is text
-          <input
-            type="radio"
-            name="type"
-            value="FILE"
-            onChange={this.handleChange}
-          />
-          <br />
-          Text
-          <input
-            type="text"
-            name="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-          />
-          <br />
-          File
-          <input type="file" onChange={this.handleFile} />
-          <br />
-          <button onClick={this.fileUploadHandler}>Create Document</button>
-        </form>
+        {/* <Link to="/:id/edit"> */}
+        <button onClick={this.handleUpdate}>Create Document</button>
+        {/* </Link> */}
       </div>
     );
   }

@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import api from "../../api";
-import NavHead from "../pages/NavHead";
-import Upload from "../pages/Upload";
 import "bootstrap/dist/css/bootstrap.min.css";
-import $ from "jquery";
-import Popper from "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      x: 0
-    };
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
+
+  handleUpdate() {
+    api.postDocuments().then(res => {
+      console.log("doc from backend -->", res);
+      this.props.history.push(`/documents/${res._id}`);
+    });
+  }
+
   render() {
     return (
       <div>
@@ -35,7 +37,7 @@ class Home extends Component {
           </div>
         </div>
         <h1>home - upload</h1>
-        <Upload />
+        <button onClick={this.handleUpdate}>Create Document</button>
       </div>
     );
   }

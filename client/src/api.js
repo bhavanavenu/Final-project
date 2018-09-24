@@ -17,34 +17,32 @@ export default {
   service: service,
 
   postDocuments() {
-    return service.post("/documents");
+    return service
+      .post("/documents")
+      .then(res => res.data)
+      .catch(errHandler);
   },
 
-  editDocuments(data) {
+  getDocument(docId) {
+    return service
+      .get("/documents/" + docId)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  updateDocument(docId, data) {
     const formData = new FormData();
     //formData.append("doc", "document");
-    formData.append("doc", data.selectedFile);
-    formData.append("label", data.selectedLabel);
-    formData.append("type", data.selectedType);
-    formData.append("text", data.selectedText);
+    formData.append("file", data.file);
+    formData.append("label", data.label);
+    formData.append("type", data.type);
+    formData.append("text", data.text);
 
-    // formData.append(
-    //   "doc",
-    //   data.selectedFile,
-    //   data.selectedLabel,
-    //   data.selectedType,
-    //   data.selectedText
-    // );
-    return service.post("/documents", formData).then(res => {
-      console.log(res);
+    return service.patch("/documents/" + docId, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
     });
-
-    // axios.post('http://localhost:5000/api/documents')
-    // add logic to send data to backend to create a document
-    // return service
-    //   .post("/documents", data)
-    //   .then(res => res.data)
-    //   .catch(errHandler);
   },
 
   getProfile(username) {
@@ -61,7 +59,7 @@ export default {
       .catch(errHandler);
   },
 
-  getDelete(id) {
+  deleteDocument(id) {
     return service
       .get("/documents/" + id)
       .then(res => res.data)
