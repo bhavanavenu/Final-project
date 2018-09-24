@@ -16,16 +16,7 @@ class Upload extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     //this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
   }
-  // fileSelectedHandler = event => {
-  //   console.log("debug");
-  //   debugger;
-  //   this.setState({
-  //     selectedFile: event.target.files[0],
-  //     selectedLabel: event.target.value,
-  //     selectedType: event.target.value,
-  //     selectedText: event.target.value
-  //   });
-  // };
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -33,7 +24,6 @@ class Upload extends Component {
   }
 
   handleFile(event) {
-    // debugger;
     this.setState({
       file: event.target.files[0]
     });
