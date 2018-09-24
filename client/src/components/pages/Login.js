@@ -22,6 +22,7 @@ class Login extends Component {
       .login(this.state.username, this.state.password)
       .then(result => {
         console.log("SUCCESS!");
+        console.log("user -->", result);
         this.props.history.push("/"); // Redirect to the home page
       })
       .catch(err => {

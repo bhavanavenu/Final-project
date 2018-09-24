@@ -4,24 +4,27 @@ const Schema = mongoose.Schema;
 const documentSchema = new Schema({
   label: {
     type: String,
-    required: true
+    // required: true,
+    default: ""
   },
   type: {
     type: String,
     required: true,
-    enum: ["TEXT", "FILE"]
+    enum: ["TEXT", "FILE"],
+    default: "TEXT"
   },
   text: {
     type: String,
-    required: true
+    // required: true,
+    default: ""
   },
   fileUrl: {
     type: String
   },
   public_id: String,
-  randomUrl: {
-    type: String
-  },
+  // randomUrl: {
+  //   type: String
+  // },
   _owner: { type: Schema.Types.ObjectId, ref: "User" }
 });
 

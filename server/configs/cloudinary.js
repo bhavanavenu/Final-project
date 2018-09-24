@@ -13,7 +13,7 @@ cloudinary.config({
 var storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "my-app-files",
-  allowedFormats: ["jpg", "png", "pdf"],
+  allowedFormats: ["jpg", "png", "pdf", "jpeg"],
   // filename: function(req, file, cb) {
   //   cb(null, "my-file-name");
   // },

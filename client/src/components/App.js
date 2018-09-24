@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Upload from "./pages/Upload";
 import api from "../api";
+import Edit from "./pages/Edit";
 
 import {
   Collapse,
@@ -18,6 +19,10 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import "./App.css";
+
+import utils from "../utils";
+
+window.utils = utils;
 
 class App extends Component {
   // api.loadUser()
@@ -31,6 +36,7 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
+          <Route path="/profile/:username/edit" component={Edit} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

@@ -1,97 +1,91 @@
 import api from "../../api";
 import React, { Component } from "react";
+import axios from "axios";
 
 class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      label: null,
-      text: null,
       file: null,
-      type: null
+      label: "",
+      type: "",
+      text: ""
     };
-
+    this.handleFile = this.handleFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFile = this.handleFile.bind(this);
+    //this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
   }
-
-  handleFile(event) {
+  // fileSelectedHandler = event => {
+  //   console.log("debug");
+  //   debugger;
+  //   this.setState({
+  //     selectedFile: event.target.files[0],
+  //     selectedLabel: event.target.value,
+  //     selectedType: event.target.value,
+  //     selectedText: event.target.value
+  //   });
+  // };
+  handleChange(event) {
     this.setState({
-      file: event.target.files[0]
+      [event.target.name]: event.target.value
     });
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleFile(event) {
+    // debugger;
+    this.setState({
+      file: event.target.files[0]
+    });
+    // api.postDocuments(this.state);
   }
 
   handleSubmit(event) {
-    alert("Document created: " + this.state.value);
     event.preventDefault();
+    console.log("submit form");
   }
 
-  handleUploadFile = event => {
-    let newDoc = {};
-
-    // const data = new FormData(); move this to the api function
-    // data.append("label", this.state.label);
-    // data.append("type", this.state.type);
-    // data.append("text", this.state.text);
-    // data.append("file", this.state.file);
-    // TODO call a method in the api.js file that triggers a route in the backend
-    api.postDocuments(newDoc).then(result => {});
-  };
   render() {
     return (
-      <div>
+      <div className="Upload">
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Label
-            <input
-              type="text"
-              value={this.state.label}
-              name="label"
-              onChange={this.handleChange}
-            />
-          </label>
-          {/* <label>
-    Type:
-    <input type="text"  value={this.state.type} name="type" onChange={this.handleChange} />
-  </label> */}
-
-          <div className="radio">
-            <label>
-              <input
-                type="radio"
-                value={this.state.type}
-                checked={true}
-                onChange={this.handleChange}
-              />
-              Text
-            </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input
-                type="radio"
-                value={this.state.type}
-                onChange={this.handleChange}
-              />
-              File
-            </label>
-          </div>
-          <label>
-            Text
-            <input
-              type="text"
-              value={this.state.text}
-              name="text"
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="file" onChange={this.handleUploadFile} />
-          <input type="submit" value="Submit" />
+          <label>Label</label>
+          <input
+            id="text"
+            type="text"
+            name="label"
+            value={this.state.label}
+            onChange={this.handleChange}
+          />
+          <br />
+          is file
+          <input
+            type="radio"
+            name="type"
+            value="TEXT"
+            onChange={this.handleChange}
+          />
+          <br />
+          is text
+          <input
+            type="radio"
+            name="type"
+            value="FILE"
+            onChange={this.handleChange}
+          />
+          <br />
+          Text
+          <input
+            type="text"
+            name="text"
+            value={this.state.text}
+            onChange={this.handleChange}
+          />
+          <br />
+          File
+          <input type="file" onChange={this.handleFile} />
+          <br />
+          <button onClick={this.fileUploadHandler}>Create Document</button>
         </form>
       </div>
     );

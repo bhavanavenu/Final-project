@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//import Upload from "./components/pages/Upload";
 const service = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
@@ -16,31 +16,54 @@ const errHandler = err => {
 export default {
   service: service,
 
-  // getCountries() {
-  //   return service
-  //     .get("/countries")
-  //     .then(res => res.data)
-  //     .catch(errHandler);
-  // },
+  postDocuments() {
+    return service.post("/documents");
+  },
 
-  postDocuments(data) {
+  editDocuments(data) {
+    const formData = new FormData();
+    //formData.append("doc", "document");
+    formData.append("doc", data.selectedFile);
+    formData.append("label", data.selectedLabel);
+    formData.append("type", data.selectedType);
+    formData.append("text", data.selectedText);
+
+    // formData.append(
+    //   "doc",
+    //   data.selectedFile,
+    //   data.selectedLabel,
+    //   data.selectedType,
+    //   data.selectedText
+    // );
+    return service.post("/documents", formData).then(res => {
+      console.log(res);
+    });
+
+    // axios.post('http://localhost:5000/api/documents')
     // add logic to send data to backend to create a document
+    // return service
+    //   .post("/documents", data)
+    //   .then(res => res.data)
+    //   .catch(errHandler);
+  },
+
+  getProfile(username) {
     return service
-      .post("/documents", data)
+      .get("/profile/" + username)
       .then(res => res.data)
       .catch(errHandler);
   },
 
-  getProfile() {
+  updateProfile(username) {
     return service
-      .get("/profile")
+      .get("/profile/" + username)
       .then(res => res.data)
       .catch(errHandler);
   },
 
   getDelete(id) {
     return service
-      .get("/documents" + id)
+      .get("/documents/" + id)
       .then(res => res.data)
       .catch(errHandler);
   },
@@ -66,10 +89,8 @@ export default {
   },
 
   logout() {
-    console.log("INSIDE LOGOUT");
-    return service.get("/logout").then(res => {
-      localStorage.removeItem("user");
-    });
+    localStorage.removeItem("user");
+    return service.get("/logout");
   },
 
   // loadUser() {

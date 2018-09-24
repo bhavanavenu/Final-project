@@ -15,7 +15,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 });
 
 //user update details
-router.put("/profile", isLoggedIn, (req, res, next) => {
+router.put("/profile/:username", isLoggedIn, (req, res, next) => {
   let email = req.body.email;
 
   User.findOneAndUpdate({ username }, { email })

@@ -5,29 +5,31 @@ const router = express.Router();
 var randomstring = require("randomstring");
 const uploadCloud = require("../configs/cloudinary");
 
+const { createAnonymousUserIfNotLoggedIn } = require("../middlewares");
+
+router.post("/", createAnonymousUserIfNotLoggedIn, (req, res, next) => {
+  Document.create({ _owner: req.user._id })
+    .then(doc => {
+      res.json(doc);
+    })
+    .catch(err => next(err));
+});
+
 //create random url, connected users will be able to see saved items
-router.post("/", uploadCloud.single("doc"), (req, res, next) => {
+router.post("/old", uploadCloud.single("doc"), (req, res, next) => {
+  console.log("User --->", req.user);
   let { label, type, text } = req.body;
-  let public_id = "";
-  let fileUrl = "";
-  let _owner = "";
+
+  let data = { label, type, text };
   if (req.file) {
-    public_id = req.file.public_id;
-    fileUrl = req.file.secure_url;
+    data.public_id = req.file.public_id;
+    data.fileUrl = req.file.secure_url;
   }
   if (req.user) {
-    _owner = req.user._id;
+    data._owner = req.user._id;
   }
-  let randomUrl = randomstring.generate();
-  Document.create({
-    label,
-    type,
-    text,
-    randomUrl,
-    fileUrl,
-    public_id,
-    _owner
-  })
+  data.randomUrl = randomstring.generate();
+  Document.create(data)
     .then(document => {
       res.json(document);
     })

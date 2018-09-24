@@ -24,7 +24,7 @@ class Profile extends Component {
         <h2>Profile</h2>
         {this.state.username}
 
-        <Link to="/">
+        <Link to={`/profile/${this.state.email}`}>
           <button type="button" onChange={e => this.handleChange(e)}>
             Edit
           </button>
