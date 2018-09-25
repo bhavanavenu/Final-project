@@ -19,7 +19,10 @@ export default {
   postDocuments() {
     return service
       .post("/documents")
-      .then(res => res.data)
+      .then(res => {
+        localStorage.setItem("user", "anonymous");
+        return res.data;
+      })
       .catch(errHandler);
   },
 

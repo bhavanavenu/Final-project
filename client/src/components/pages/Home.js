@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../api";
+import utils from "../../utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
@@ -12,7 +13,9 @@ class Home extends Component {
   handleUpdate() {
     api.postDocuments().then(res => {
       console.log("doc from backend -->", res);
-      this.props.history.push(`/documents/${res._id}`);
+      this.props.history.push(
+        `/documents/${res._id}?key=${utils.generateRandomKey()}`
+      );
     });
   }
 

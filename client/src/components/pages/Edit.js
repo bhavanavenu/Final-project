@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../../api";
+import utils from "../../utils";
 
 class Edit extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class Edit extends React.Component {
       label: "",
       type: "",
       text: "",
-      alert: ""
+      alert: "",
+      value: ""
     };
     this.handleFile = this.handleFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -38,6 +40,7 @@ class Edit extends React.Component {
       //     label: res.label,
       //     type: res.type,
       //     text: res.text
+
       //   });
       // });
       .catch(err => console.log(err));
@@ -57,18 +60,24 @@ class Edit extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let updates = { ...this.state };
+    // if (this.state.type === "TEXT")
+    let encryptedText = utils.encrypt(
+      this.state.text,
+      utils.generateRandomKey() // this should be the random key in the address this.props.location.search
+    );
+    console.log(encryptedText);
+    let updates = { text: encryptedText /* ... */ };
     api.updateDocument(this.props.match.params.id, updates).then(res => {
       console.log("res", res);
       console.log("res.data", res.data);
 
       // TODO: save a state.alert
-      setTimeout(
-        {
-          // TODO: remove the state.alert
-        },
-        2000
-      );
+      // setTimeout(
+      //   {
+      //     // TODO: remove the state.alert
+      //   },
+      //   2000
+      // );
 
       // this.setState({
       //   fileUrl: res.fileUrl,
