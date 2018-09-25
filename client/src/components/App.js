@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Upload from "./pages/Upload";
 import api from "../api";
 import Edit from "./pages/Edit";
+import Updateprofile from "./pages/Updateprofile";
 
 import {
   Collapse,
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
+          <Route path="/profile/edit" component={Updateprofile} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

@@ -3,6 +3,7 @@ import api from "../../api";
 import utils from "../../utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "./Home.css";
 
 class Home extends Component {
   constructor(props) {
@@ -40,7 +41,9 @@ class Home extends Component {
           </div>
         </div>
         <h1>home - upload</h1>
-        <button onClick={this.handleUpdate}>Create Document</button>
+        <button className="button" onClick={this.handleUpdate}>
+          Create Document
+        </button>
       </div>
     );
   }
