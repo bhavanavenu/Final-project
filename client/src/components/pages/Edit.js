@@ -45,6 +45,12 @@ class Edit extends React.Component {
       //   });
       // });
       .catch(err => console.log(err));
+
+    window.addEventListener("beforeunload", ev => {
+      ev.preventDefault();
+      console.log("TODO: delete");
+      return (ev.returnValue = "Are you sure you want to close?");
+    });
   }
 
   handleChange(event) {

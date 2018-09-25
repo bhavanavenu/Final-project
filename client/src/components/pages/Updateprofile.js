@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import api from "../../api";
 
 class Updateprofile extends Component {
   render() {

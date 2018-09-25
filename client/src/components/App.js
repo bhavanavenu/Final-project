@@ -44,6 +44,12 @@ class App extends Component {
       </div>
     );
   }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    localStorage.setItem("componentWillUnmount", "test");
+    alert("componentWillUnmount");
+  }
 }
 
 export default App;
