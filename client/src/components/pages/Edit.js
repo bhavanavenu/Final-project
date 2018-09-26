@@ -176,6 +176,9 @@ class Edit extends React.Component {
           <h5>Text : {this.state.text}</h5>
 
           <h5>File :{this.state.fileUrl}</h5>
+          <a href="{this.state.fileUrl}" download>
+            Download file
+          </a>
         </div>
       );
     }

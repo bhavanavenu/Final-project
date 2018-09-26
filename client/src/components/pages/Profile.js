@@ -5,32 +5,30 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: null,
-      name: ""
+      username: "",
+      user: ""
     };
   }
 
   render() {
+    console.log(this.state.user);
     return (
-      <div className="Home">
-        <h2>Profile</h2>
-        Name : {this.state.name}
-        <h1>Sent Documents:</h1>
-        <ul>
-          <li />
-        </ul>
-        {/* <Link to={`/profile/`}>Edit</Link> */}
+      <div className="Profile">
+        <h1>My profile</h1>
+        Name : {this.state.user.username}
+        <br />
+        <button>Sent Documents</button>
+        <br />
       </div>
     );
   }
-
   componentDidMount() {
     api.getProfile().then(user => {
       this.setState({
-        name: user.name,
-        email: user.email
+        user: user
       });
     });
   }
 }
+
 export default Profile;

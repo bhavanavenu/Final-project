@@ -60,13 +60,16 @@ export default {
       .then(res => res.data)
       .catch(errHandler);
   },
-
-  getProfile(username) {
-    return service
-      .get("/profile/" + username)
-      .then(res => res.data)
-      .catch(errHandler);
+  getProfile() {
+    return service.get("/profile").then(res => res.data);
   },
+
+  // getProfile(username) {
+  //   return service
+  //     .get("/profile/" + username)
+  //     .then(res => res.data)
+  //     .catch(errHandler);
+  // },
 
   updateProfile(id, data) {
     return service

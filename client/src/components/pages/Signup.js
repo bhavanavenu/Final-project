@@ -1,49 +1,86 @@
-import React, { Component } from 'react';
-import api from '../../api';
+import React, { Component } from "react";
+import api from "../../api";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "./Login.css";
 
 class Signup extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
+      email: "",
       username: "",
-      name: "",
-      password: "",
-    }
+      password: ""
+    };
   }
 
   handleInputChange(stateFieldName, event) {
-    this.setState({
-      [stateFieldName]: event.target.value
-    })
+    let newState = {};
+    newState[stateFieldName] = event.target.value;
+
+    this.setState(newState);
   }
 
   handleClick(e) {
-    e.preventDefault()
+    e.preventDefault();
     let data = {
+      email: this.state.email,
       username: this.state.username,
-      name: this.state.name,
-      password: this.state.password,
-    }
-    api.signup(data)
+      password: this.state.password
+    };
+    api
+      .signup(data)
       .then(result => {
-        console.log('SUCCESS!')
-        this.props.history.push("/login") // Redirect to the login page
+        console.log("SUCCESS!");
+        this.props.history.push("/login"); // Redirect to the login page
       })
       .catch(err => {
-        console.log('ERROR')
-      })
+        console.log("ERROR");
+      });
   }
 
   render() {
     return (
-      <div className="Signup">
-        <h2>Signup</h2>
-        <form>
-          Username: <input type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
-          Name: <input type="text" value={this.state.name} onChange={(e) => this.handleInputChange("name", e)} /> <br />
-          Password: <input type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
-          <button onClick={(e) => this.handleClick(e)}>Signup</button>
-        </form>
+      <div className="container relative-pos">
+        <div className="center-vertically">
+          <Form>
+            <FormGroup>
+              <h1>Sign Up</h1>
+            </FormGroup>
+            <FormGroup className="mt-5">
+              <Label>Username</Label>
+              <Input
+                value={this.state.username}
+                onChange={e => {
+                  this.handleInputChange("username", e);
+                }}
+              />
+            </FormGroup>
+            <FormGroup className="mt-3">
+              <Label for="exampleEmail">Email</Label>
+              <Input
+                type="text"
+                value={this.state.email}
+                onChange={e => {
+                  this.handleInputChange("email", e);
+                }}
+              />
+            </FormGroup>
+            <FormGroup className="mt-3">
+              <Label>Password</Label>
+              <Input
+                type="password"
+                value={this.state.password}
+                onChange={e => {
+                  this.handleInputChange("password", e);
+                }}
+              />
+            </FormGroup>
+            <Button className="mt-3" onClick={e => this.handleClick(e)}>
+              Sign Up
+            </Button>
+          </Form>
+        </div>
       </div>
     );
   }
