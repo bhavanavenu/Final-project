@@ -23,17 +23,21 @@ router.post("/", createAnonymousUserIfNotLoggedIn, (req, res, next) => {
 
 router.post("/file", uploadCloud.single("file"), (req, res, next) => {
   let fileUrl = req.file.secure_url;
+  let publicId = req.file.public_id;
+  console.log("DEBUG req.file.public_id", req.file.public_id);
+
   res.json({
     message: "File was created",
-    fileUrl
+    fileUrl,
+    publicId
   });
 });
 
 //update doc
 router.patch("/:id", (req, res, next) => {
   console.log("REQ.BODY -->", req.body);
-  let { label, type, text, fileUrl } = req.body;
-  const update = { fileUrl, label, type, text };
+  let { label, type, text, fileUrl, publicId } = req.body;
+  const update = { fileUrl, label, type, text, publicId };
   Document.findByIdAndUpdate(req.params.id, update)
     .then(updated => {
       res.json({
@@ -51,7 +55,9 @@ router.post("/old", uploadCloud.single("doc"), (req, res, next) => {
 
   let data = { label, type, text };
   if (req.file) {
-    data.public_id = req.file.public_id;
+    data.publicId = req.file.public_id;
+    console.log("DEBUG data.publicId", data.publicId);
+
     data.fileUrl = req.file.secure_url;
   }
   if (req.user) {
