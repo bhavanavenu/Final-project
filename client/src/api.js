@@ -33,19 +33,32 @@ export default {
       .catch(errHandler);
   },
 
-  updateDocument(docId, data) {
+  createFile(data) {
+    console.log("Data in api create file -->", data);
     const formData = new FormData();
-    //formData.append("doc", "document");
     formData.append("file", data.file);
-    formData.append("label", data.label);
-    formData.append("type", data.type);
-    formData.append("text", data.text);
+    return service
+      .post("/documents/file", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      .then(res => res.data)
+      .catch(errHandler);
+  },
 
-    return service.patch("/documents/" + docId, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    });
+  updateDocument(docId, data) {
+    // const formData = new FormData();
+    // //formData.append("doc", "document");
+    // // formData.append("file", data.file);
+    // formData.append("label", data.label);
+    // formData.append("type", data.type);
+    // formData.append("text", data.text);
+
+    return service
+      .patch("/documents/" + docId, data)
+      .then(res => res.data)
+      .catch(errHandler);
   },
 
   getProfile(username) {

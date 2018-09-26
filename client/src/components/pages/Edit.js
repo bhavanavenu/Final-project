@@ -1,6 +1,8 @@
 import React from "react";
 import api from "../../api";
 import utils from "../../utils";
+import { Route, Link, Switch } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 class Edit extends React.Component {
   constructor(props) {
@@ -34,16 +36,7 @@ class Edit extends React.Component {
           text: utils.decrypt(doc.text, key)
         });
       })
-      // api.updateDocument(this.props.match.params.id).then(res => {
-      //   console.log("Document from db -->", res);
-      //   this.setState({
-      //     file: res.file,
-      //     label: res.label,
-      //     type: res.type,
-      //     text: res.text
 
-      //   });
-      // });
       .catch(err => console.log(err));
 
     window.addEventListener("beforeunload", ev => {
@@ -59,38 +52,42 @@ class Edit extends React.Component {
     });
   }
 
-  handleFile(event) {
-    this.setState({
-      file: event.target.files[0]
+  handleCreateFile() {
+    console.log("Calling api to crate file!!!");
+    api.createFile({ file: this.state.file }).then(res => {
+      console.log("File created -->", res);
+      this.setState({
+        fileUrl: res.fileUrl,
+        publicId: res.publicId
+      });
     });
+  }
+
+  handleFile(event) {
+    this.setState(
+      {
+        file: event.target.files[0]
+      },
+      () => {
+        this.handleCreateFile();
+      }
+    );
   }
 
   handleSubmit(event) {
     event.preventDefault();
     // if (this.state.type === "TEXT")
     let key = this.props.location.search.substring(5);
-    let encryptedText = utils.encrypt(this.state.text, key);
-    let encryptedLabel = utils.encrypt(this.state.label, key);
-
-    console.log(encryptedText);
     let updates = {
-      text: encryptedText,
+      text: utils.encrypt(this.state.text, key),
       type: this.state.type,
-      label: encryptedLabel,
-      file: this.state.file
+      label: utils.encrypt(this.state.label, key),
+      fileUrl: utils.encrypt(this.state.fileUrl, key),
+      publicId: this.state.publicId
     };
     api.updateDocument(this.props.match.params.id, updates).then(res => {
       setTimeout(() => alert("Documents were created!"), 1000);
       console.log("res", res);
-      console.log("res.data", res.data);
-
-      // TODO: save a state.alert
-      // setTimeout(
-      //   {
-      //     // TODO: remove the state.alert
-      //   },
-      //   2000
-      // );
     });
   }
 
@@ -141,12 +138,27 @@ class Edit extends React.Component {
               onChange={this.handleChange}
             />
             <br />
+            {this.state.fileUrl && (
+              <span>
+                Your file: {this.state.fileUrl}
+                <br />
+              </span>
+            )}
             File
             <input type="file" onChange={this.handleFile} />
             <br />
             <button type="submit">Upload</button>
             <button onClick={this.handleDelete}>Delete</button>
+            <span>
+              <Link to="/">Generate new</Link>
+            </span>
           </form>
+          <div>
+            <br />
+            <CopyToClipboard text={window.location.href}>
+              <button>Copy URL to the clipboard</button>
+            </CopyToClipboard>
+          </div>
         </div>
       );
     } else {
@@ -157,12 +169,13 @@ class Edit extends React.Component {
             note again. If you need access to this information again please copy
             it to a secure location.
           </h2>
-          <h4>
+          <h5>
             Label:
             {this.state.label}
-          </h4>
-          <h4>Text : {this.state.text}</h4>
-          <h4>File : {this.state.fileUrl}</h4>
+          </h5>
+          <h5>Text : {this.state.text}</h5>
+
+          <h5>File :{this.state.fileUrl}</h5>
         </div>
       );
     }

@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 import api from "../../api.js";
+import "./NavHead.css";
 
 export default class NavHead extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class NavHead extends Component {
 
   render() {
     return (
-      <Navbar className="IronNavbar" color="primary" dark expand="sm">
+      <Navbar className="IronNavbar" dark expand="sm">
         <Container>
           <NavLink className="navbar-brand" to="/">
             <img src="/images/doc.png" alt="logo" />

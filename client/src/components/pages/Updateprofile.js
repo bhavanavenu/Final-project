@@ -5,7 +5,7 @@ class Updateprofile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      name: "",
       email: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -15,9 +15,9 @@ class Updateprofile extends Component {
   componentDidMount() {
     api.getProfile(this.props.match.params.id).then(res => {
       this.setState({
-        username: res.name,
+        name: res.name,
         email: res.email,
-        message: `${this.state.username}', your profile has been edited`
+        message: `${this.state.name}', your profile has been edited`
       });
     });
   }

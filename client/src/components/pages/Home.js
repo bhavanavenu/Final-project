@@ -4,6 +4,7 @@ import utils from "../../utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Home.css";
+import Footer from "../pages/Footer";
 
 class Home extends Component {
   constructor(props) {
@@ -44,6 +45,9 @@ class Home extends Component {
         <button className="button" onClick={this.handleUpdate}>
           Create Document
         </button>
+        <div class="footer">
+          <Footer />
+        </div>
       </div>
     );
   }
