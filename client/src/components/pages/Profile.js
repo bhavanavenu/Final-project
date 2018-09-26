@@ -6,7 +6,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: null
+      email: null,
+      name: null
     };
   }
   handleChange(e) {
@@ -21,13 +22,9 @@ class Profile extends Component {
     return (
       <div className="Home">
         <h2>Profile</h2>
-        {this.state.username}
-
-        <Link to={`/profile`}>
-          <button type="button" onChange={e => this.handleChange(e)}>
-            Edit
-          </button>
-        </Link>
+        Name : {this.state.name}
+        <h1>Sent Documents:</h1>
+        {/* <Link to={`/profile/`}>Edit</Link> */}
       </div>
     );
   }
@@ -35,6 +32,7 @@ class Profile extends Component {
   componentDidMount() {
     api.getProfile().then(user => {
       this.setState({
+        name: user.name,
         email: user.email
       });
     });

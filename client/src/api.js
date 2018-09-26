@@ -55,9 +55,9 @@ export default {
       .catch(errHandler);
   },
 
-  updateProfile(username) {
+  updateProfile(id, data) {
     return service
-      .get("/profile/" + username)
+      .get("/profile/" + id, data)
       .then(res => res.data)
       .catch(errHandler);
   },

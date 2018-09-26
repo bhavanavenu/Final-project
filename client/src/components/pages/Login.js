@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import api from "../../api";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "./Login.css";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
   }
 
   handleInputChange(stateFieldName, event) {
-    this.setState({
-      [stateFieldName]: event.target.value
-    });
+    let newState = {};
+    newState[stateFieldName] = event.target.value;
+
+    this.setState(newState);
   }
 
   handleClick(e) {
     e.preventDefault();
     api
-      .login(this.state.username, this.state.password)
+      .login(this.state.email, this.state.password)
       .then(result => {
         console.log("SUCCESS!");
-        console.log("user -->", result);
         this.props.history.push("/"); // Redirect to the home page
       })
       .catch(err => {
@@ -32,25 +36,37 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
-        <h2>Login</h2>
-        <form>
-          Username:{" "}
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={e => this.handleInputChange("username", e)}
-          />{" "}
-          <br />
-          Password:{" "}
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={e => this.handleInputChange("password", e)}
-          />{" "}
-          <br />
-          <button onClick={e => this.handleClick(e)}>Login</button>
-        </form>
+      <div className="container relative-pos">
+        <div className="center-vertically">
+          <Form>
+            <FormGroup>
+              <h1>Login</h1>
+            </FormGroup>
+            <FormGroup className="mt-5">
+              <Label for="exampleEmail">Email</Label>
+              <Input
+                type="text"
+                value={this.state.email}
+                onChange={e => {
+                  this.handleInputChange("email", e);
+                }}
+              />
+            </FormGroup>
+            <FormGroup className="mt-3">
+              <Label>Password</Label>
+              <Input
+                type="password"
+                value={this.state.password}
+                onChange={e => {
+                  this.handleInputChange("password", e);
+                }}
+              />
+            </FormGroup>
+            <Button className="mt-3" onClick={e => this.handleClick(e)}>
+              Login
+            </Button>
+          </Form>
+        </div>
       </div>
     );
   }

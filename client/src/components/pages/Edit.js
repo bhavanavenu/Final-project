@@ -144,7 +144,7 @@ class Edit extends React.Component {
             File
             <input type="file" onChange={this.handleFile} />
             <br />
-            <button type="submit">Update</button>
+            <button type="submit">Upload</button>
             <button onClick={this.handleDelete}>Delete</button>
           </form>
         </div>
@@ -152,9 +152,17 @@ class Edit extends React.Component {
     } else {
       return (
         <div className="read-only">
-          <h2>{this.state.label}</h2>
-          <p>{this.state.text}</p>
-          <p>{this.state.fileUrl}</p>
+          <h2>
+            This Document will self destruct! Once viewed you can not view this
+            note again. If you need access to this information again please copy
+            it to a secure location.
+          </h2>
+          <h4>
+            Label:
+            {this.state.label}
+          </h4>
+          <h4>Text : {this.state.text}</h4>
+          <h4>File : {this.state.fileUrl}</h4>
         </div>
       );
     }

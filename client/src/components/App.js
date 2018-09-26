@@ -9,6 +9,7 @@ import Upload from "./pages/Upload";
 import api from "../api";
 import Edit from "./pages/Edit";
 import Updateprofile from "./pages/Updateprofile";
+import Footer from "./pages/Footer";
 
 import {
   Collapse,
@@ -32,13 +33,14 @@ class App extends Component {
     return (
       <div className="App">
         <NavHead />
+        <Footer />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/documents/:id" exact component={Edit} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
-          <Route path="/profile/edit" component={Updateprofile} />
+          <Route path="/profile/:id/edit" component={Updateprofile} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>
