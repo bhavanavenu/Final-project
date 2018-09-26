@@ -9,7 +9,6 @@ import Upload from "./pages/Upload";
 import api from "../api";
 import Edit from "./pages/Edit";
 import Updateprofile from "./pages/Updateprofile";
-import Footer from "./pages/Footer";
 
 import {
   Collapse,
@@ -33,7 +32,6 @@ class App extends Component {
     return (
       <div className="App">
         <NavHead />
-        <Footer />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/documents/:id" exact component={Edit} />
