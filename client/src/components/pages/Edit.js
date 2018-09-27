@@ -118,62 +118,64 @@ class Edit extends React.Component {
   render() {
     if (api.isLoggedIn()) {
       return (
-        <div className="container">
+        <div className="container container80 shadow-lg p-5 rounded">
           <h1>Document Edit</h1>
           <form onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className="col-sm-4">
-                <label>Label</label>
-              </div>
-              <div className="col-sm-4">
-                <input
-                  id="text"
-                  type="text"
-                  className="form-control"
-                  name="label"
-                  value={this.state.label}
-                  onChange={this.handleChange}
-                />
-              </div>
+            <div className="form-group">
+              <label>Label</label>
+              <input
+                className="form-control"
+                id="text"
+                type="text"
+                className="form-control"
+                name="label"
+                value={this.state.label}
+                onChange={this.handleChange}
+              />
             </div>
-            <br />
-            is file
-            <input
-              type="radio"
-              name="type"
-              value="FILE"
-              onChange={this.handleChange}
-              selected={this.state.type === "FILE" ? true : false}
-            />
-            <br />
-            is text
-            <input
-              type="radio"
-              name="type"
-              value="TEXT"
-              onChange={this.handleChange}
-              selected={this.state.type === "TEXT" ? true : false}
-            />
-            <br />
-            Text
-            <input
-              className="col-sm-8"
-              size="100"
-              type="text"
-              name="text"
-              value={this.state.text}
-              onChange={this.handleChange}
-            />
-            <br />
-            {this.state.fileUrl && (
-              <span>
-                Your file: {this.state.fileUrl}
-                <br />
-              </span>
-            )}
-            File
+            <div className="form-group form-check">
+              <label className="form-check-label">is file</label>
+              <input
+                type="radio"
+                name="type"
+                value="FILE"
+                onChange={this.handleChange}
+                selected={this.state.type === "FILE" ? true : false}
+              />
+
+              <label className="form-check-label">is Text</label>
+              <input
+                type="radio"
+                name="type"
+                value="TEXT"
+                onChange={this.handleChange}
+                selected={this.state.type === "TEXT" ? true : false}
+              />
+            </div>
+            <div className="form-group">
+              <label>Text</label>
+
+              <textarea
+                className="form-control"
+                rows="3"
+                size="100"
+                type="text"
+                name="text"
+                value={this.state.text}
+                onChange={this.handleChange}
+              />
+              <br />
+              {this.state.fileUrl && (
+                <span>
+                  Your file: {this.state.fileUrl}
+                  <br />
+                </span>
+              )}
+            </div>
+
+            <label>File</label>
             <input type="file" onChange={this.handleFile} />
-            <br />
+
             <button className="btn btn-primary" type="submit">
               Upload
             </button>

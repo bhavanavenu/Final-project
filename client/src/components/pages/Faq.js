@@ -6,11 +6,10 @@ import "./Faq.css";
 class Faq extends Component {
   render() {
     return (
-      <div class="container">
-        <div className="col-sm-12">
-          <div class="heading">
-            <h5>Frequency Asked Questions</h5>
-          </div>
+      <div className="container container90 align-buttom align-middle">
+        <div className="faq">
+          <h5>Frequency Asked Questions</h5>
+
           <dl>
             <dt>How secure is Cipher?</dt>
             <dd>
