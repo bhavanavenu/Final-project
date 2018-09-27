@@ -25,7 +25,7 @@ class Home extends Component {
     return (
       <div className="container">
         <div id="main">
-          <div className="container">
+          <div className="homecontainer">
             <div className="row">
               <div className="col-sm-6">
                 <h3>What is it?</h3>

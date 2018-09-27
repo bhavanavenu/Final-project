@@ -125,7 +125,7 @@ class Edit extends React.Component {
               <div className="col-sm-4">
                 <label>Label</label>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-4">
                 <input
                   id="text"
                   type="text"
@@ -157,6 +157,8 @@ class Edit extends React.Component {
             <br />
             Text
             <input
+              className="col-sm-8"
+              size="100"
               type="text"
               name="text"
               value={this.state.text}
@@ -180,12 +182,11 @@ class Edit extends React.Component {
               <Link to="/">Generate new</Link>
             </span>
           </form>
-          <div>
-            <br />
-            <CopyToClipboard text={window.location.href}>
-              <button>Copy URL to the clipboard</button>
-            </CopyToClipboard>
-          </div>
+
+          <br />
+          <CopyToClipboard text={window.location.href}>
+            <button>Copy URL to the clipboard</button>
+          </CopyToClipboard>
         </div>
       );
     } else {

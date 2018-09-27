@@ -17,7 +17,7 @@ class Profile extends Component {
         <h1>My profile</h1>
         Name : {this.state.user.username}
         <br />
-        <button>Sent Documents</button>
+        <h2>Sent Documents</h2>
         <br />
       </div>
     );
