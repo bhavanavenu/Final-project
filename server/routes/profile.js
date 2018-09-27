@@ -6,16 +6,13 @@ const { isLoggedIn } = require("../middlewares");
 const router = express.Router();
 
 router.get("/", isLoggedIn, (req, res, next) => {
-  res.json(req.user);
+  let user = req.user;
+  Document.find({ _owner: req.user._id })
+    .then(documents => {
+      res.json({ documents, user });
+    })
+    .catch(err => next(err));
 });
-// get user profile
-// router.get("/", isLoggedIn, (req, res, next) => {
-//   Document.find({ _owner: req.user._id })
-//     .then(documents => {
-//       res.json(documents);
-//     })
-//     .catch(err => next(err));
-// });
 
 //user update details
 router.put("/:username/edit", isLoggedIn, (req, res, next) => {

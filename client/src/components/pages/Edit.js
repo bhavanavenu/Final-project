@@ -152,6 +152,7 @@ class Edit extends React.Component {
                 selected={this.state.type === "TEXT" ? true : false}
               />
             </div>
+            {/* (if({this.state.type==="TEXT"}){ */}
             <div className="form-group">
               <label>Text</label>
 
@@ -164,6 +165,7 @@ class Edit extends React.Component {
                 value={this.state.text}
                 onChange={this.handleChange}
               />
+
               <br />
               {this.state.fileUrl && (
                 <span>

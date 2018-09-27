@@ -12,6 +12,7 @@
   text-align: center;
 }
 
-/* .container {
-  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
-} */
+.container20 {
+  text-align: center;
+  height: calc(100vh - 60px);
+}

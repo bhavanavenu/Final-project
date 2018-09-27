@@ -6,8 +6,8 @@ import "./Faq.css";
 class Faq extends Component {
   render() {
     return (
-      <div className="container container90 align-buttom align-middle">
-        <div className="faq">
+      <div className="container ">
+        <div className="faq align-middle mt-5">
           <h5>Frequency Asked Questions</h5>
 
           <dl>
