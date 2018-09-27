@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class Footer extends Component {
   render() {
     return (
-      <div>
+      <div className="foot">
         <Link to="/faq">Frequently Asked Questions</Link>
       </div>
     );

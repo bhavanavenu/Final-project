@@ -25,19 +25,12 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="container20">
-          <h3>What is it?</h3>
-          <p>
-            If you need to send a password or some other form of simple but
-            sensitive information to someone you can not send it over IM or
-            email. These methods are not secure as anyone with little knowledge
-            can intercept this information during transmission. Using this as
-            the "middle man" you can safely and securely transfer this data to
-            your recipient.
-          </p>
+          <div style={{ fontSize: 100 }}>Cipher</div>
+          <p>Share secrets anonymously without being watched!</p>
 
-          <h1>home - upload</h1>
+          {/* <h1>home - upload</h1> */}
           <button className="button" onClick={this.handleUpdate}>
-            Create Document
+            share secret
           </button>
         </div>
         <div className="footer">

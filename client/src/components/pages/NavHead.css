@@ -1,3 +1,7 @@
 /* .IronNavbar {
   background-color: rgb(200, 226, 226);
 } */
+
+.nav-link {
+  color: black !important;
+}
