@@ -80,7 +80,7 @@ export default {
 
   deleteDocument(id) {
     return service
-      .get("/documents/" + id)
+      .delete("/documents/" + id)
       .then(res => res.data)
       .catch(errHandler);
   },

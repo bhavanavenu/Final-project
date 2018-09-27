@@ -1,9 +1,21 @@
 const express = require("express");
 const Document = require("../models/Document");
 
+///AWS config////
+
+var AWS = require("aws-sdk");
+AWS.config.update({
+  accessKeyId: process.env.AWS_KEY,
+  secretAccessKey: process.env.AWS_SECRET
+});
+var s3 = new AWS.S3();
+
+///////////////////
+
 const router = express.Router();
 var randomstring = require("randomstring");
-const uploadCloud = require("../configs/cloudinary");
+//const uploadCloud = require("../configs/cloudinary");
+const uploadCloud = require("../configs/s3");
 
 const { createAnonymousUserIfNotLoggedIn } = require("../middlewares");
 
@@ -22,22 +34,24 @@ router.post("/", createAnonymousUserIfNotLoggedIn, (req, res, next) => {
 });
 
 router.post("/file", uploadCloud.single("file"), (req, res, next) => {
-  let fileUrl = req.file.secure_url;
-  let publicId = req.file.public_id;
-  console.log("DEBUG req.file.public_id", req.file.public_id);
+  // let fileUrl = req.file.secure_url;
+  let fileUrl = req.file.location;
+  //let publicId = req.file.public_id;
+  let publicId = req.file.etag;
+  console.log("DEBUG req.file", req.file);
 
   res.json({
     message: "File was created",
     fileUrl,
-    publicId
+    key: req.file.key
   });
 });
 
 //update doc
 router.patch("/:id", (req, res, next) => {
   console.log("REQ.BODY -->", req.body);
-  let { label, type, text, fileUrl, publicId } = req.body;
-  const update = { fileUrl, label, type, text, publicId };
+  let { label, type, text, fileUrl, key } = req.body;
+  const update = { fileUrl, label, type, text, key };
   Document.findByIdAndUpdate(req.params.id, update)
     .then(updated => {
       res.json({
@@ -88,15 +102,22 @@ router.get("/:id/:randomUrl", (req, res, next) => {
 // //delete document from db
 //router.delete("/:id/:random", (req, res, next) => {});
 
-// //delete docs if he uploads wrong docs
+//delete docs if we upload wrong
 router.delete("/:id", (req, res, next) => {
   let docId = req.params.id;
 
   Document.findByIdAndRemove(docId)
     .then(document => {
-      res.json({
-        success: true,
-        document
+      var params = {
+        Bucket: "enigma-cipher",
+        Key: document.key
+      };
+      s3.deleteObject(params, (err, data) => {
+        res.json({
+          success: !err,
+          err,
+          document
+        });
       });
     })
     .catch(err => next(err));

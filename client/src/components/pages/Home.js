@@ -23,7 +23,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <div id="main">
           <div className="container">
             <div className="row">

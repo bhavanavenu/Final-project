@@ -41,7 +41,14 @@ class Edit extends React.Component {
 
     window.addEventListener("beforeunload", ev => {
       ev.preventDefault();
-      console.log("TODO: delete");
+      console.log("Closing the window and deleteing the file and the document");
+      //call deleteDocument to delete from mongodb.
+      console.log("Calling api to delete file in S3!!!");
+      api.deleteDocument(this.props.match.params.id).then(res => {
+        setTimeout(alert("Documents were deleted!"), 1000);
+        this.props.history.push("/");
+      });
+
       return (ev.returnValue = "Are you sure you want to close?");
     });
   }
@@ -52,13 +59,24 @@ class Edit extends React.Component {
     });
   }
 
+  // handleCreateFile() {
+  //   console.log("Calling api to crate file!!!");
+  //   api.createFile({ file: this.state.file }).then(res => {
+  //     console.log("File created -->", res);
+  //     this.setState({
+  //       fileUrl: res.fileUrl,
+  //       key: res.key
+  //     });
+  //   });
+  // }
+
   handleCreateFile() {
-    console.log("Calling api to crate file!!!");
+    console.log("Calling api to create file!!!");
     api.createFile({ file: this.state.file }).then(res => {
       console.log("File created -->", res);
       this.setState({
         fileUrl: res.fileUrl,
-        publicId: res.publicId
+        key: res.key
       });
     });
   }
@@ -83,7 +101,7 @@ class Edit extends React.Component {
       type: this.state.type,
       label: utils.encrypt(this.state.label, key),
       fileUrl: utils.encrypt(this.state.fileUrl, key),
-      publicId: this.state.publicId
+      key: this.state.key
     };
     api.updateDocument(this.props.match.params.id, updates).then(res => {
       setTimeout(() => alert("Documents were created!"), 1000);
@@ -100,17 +118,24 @@ class Edit extends React.Component {
   render() {
     if (api.isLoggedIn()) {
       return (
-        <div>
+        <div className="container">
           <h1>Document Edit</h1>
           <form onSubmit={this.handleSubmit}>
-            <label>Label</label>
-            <input
-              id="text"
-              type="text"
-              name="label"
-              value={this.state.label}
-              onChange={this.handleChange}
-            />
+            <div className="row">
+              <div className="col-sm-4">
+                <label>Label</label>
+              </div>
+              <div className="col-sm-8">
+                <input
+                  id="text"
+                  type="text"
+                  className="form-control"
+                  name="label"
+                  value={this.state.label}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
             <br />
             is file
             <input
@@ -147,8 +172,10 @@ class Edit extends React.Component {
             File
             <input type="file" onChange={this.handleFile} />
             <br />
-            <button type="submit">Upload</button>
-            <button onClick={this.handleDelete}>Delete</button>
+            <button className="btn btn-primary" type="submit">
+              Upload
+            </button>
+            {/* <button onClick={this.handleDelete}>Delete</button> */}
             <span>
               <Link to="/">Generate new</Link>
             </span>
@@ -176,8 +203,8 @@ class Edit extends React.Component {
           <h5>Text : {this.state.text}</h5>
 
           <h5>File :{this.state.fileUrl}</h5>
-          <a href="{this.state.fileUrl}" download>
-            Download file
+          <a href={this.state.fileUrl} target="blank">
+            {this.state.fileUrl}
           </a>
         </div>
       );

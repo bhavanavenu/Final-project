@@ -22,7 +22,7 @@ const documentSchema = new Schema({
     type: String,
     default: ""
   },
-  publicId: String,
+  key: String,
   // randomUrl: {
   //   type: String
   // },
