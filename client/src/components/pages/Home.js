@@ -29,12 +29,16 @@ class Home extends Component {
           <p>Share secrets anonymously without being watched!</p>
 
           {/* <h1>home - upload</h1> */}
-          <button className="button" onClick={this.handleUpdate}>
-            share secret
+          <button
+            className="button btn btn-warning"
+            onClick={this.handleUpdate}
+          >
+            <span class="glyphicon glyphicon-lock" /> share secret
           </button>
-        </div>
+
+          {/* </div>
         <div className="footer">
-          <Footer />
+          <Footer /> */}
         </div>
       </div>
     );

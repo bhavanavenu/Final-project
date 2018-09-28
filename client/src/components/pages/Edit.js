@@ -3,6 +3,7 @@ import api from "../../api";
 import utils from "../../utils";
 import { Route, Link, Switch } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import "./Edit.css";
 
 class Edit extends React.Component {
   constructor(props) {
@@ -41,9 +42,9 @@ class Edit extends React.Component {
 
     window.addEventListener("beforeunload", ev => {
       ev.preventDefault();
-      console.log("Closing the window and deleteing the file and the document");
-      //call deleteDocument to delete from mongodb.
-      console.log("Calling api to delete file in S3!!!");
+      // console.log("Closing the window and deleteing the file and the document");
+      // //call deleteDocument to delete from mongodb.
+      // console.log("Calling api to delete file in S3!!!");
       api.deleteDocument(this.props.match.params.id).then(res => {
         setTimeout(alert("Documents were deleted!"), 1000);
         this.props.history.push("/");
@@ -104,7 +105,7 @@ class Edit extends React.Component {
       key: this.state.key
     };
     api.updateDocument(this.props.match.params.id, updates).then(res => {
-      setTimeout(() => alert("Documents were created!"), 1000);
+      setTimeout(() => alert("Generated link copied to clipboard!"), 1000);
       console.log("res", res);
     });
   }
@@ -119,9 +120,9 @@ class Edit extends React.Component {
     if (api.isLoggedIn()) {
       return (
         <div className="container container80 shadow-lg p-5 rounded">
-          <h1>Document Edit</h1>
+          {/* <h1>Document Edit</h1> */}
           <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Label</label>
               <input
                 className="form-control"
@@ -132,9 +133,9 @@ class Edit extends React.Component {
                 value={this.state.label}
                 onChange={this.handleChange}
               />
-            </div>
-            <div className="form-group form-check">
-              <label className="form-check-label">is file</label>
+            </div> */}
+            {/* <div className="form-group form-check">
+              <label>File</label>
               <input
                 type="radio"
                 name="type"
@@ -142,8 +143,8 @@ class Edit extends React.Component {
                 onChange={this.handleChange}
                 selected={this.state.type === "FILE" ? true : false}
               />
-
-              <label className="form-check-label">is Text</label>
+              <br />
+              <label>Text</label>
               <input
                 type="radio"
                 name="type"
@@ -151,17 +152,18 @@ class Edit extends React.Component {
                 onChange={this.handleChange}
                 selected={this.state.type === "TEXT" ? true : false}
               />
-            </div>
+            </div> */}
             {/* (if({this.state.type==="TEXT"}){ */}
             <div className="form-group">
-              <label>Text</label>
+              {/* <label>T</label> */}
 
               <textarea
                 className="form-control"
-                rows="3"
+                rows="5"
                 size="100"
                 type="text"
                 name="text"
+                placeholder="Type your secret here!"
                 value={this.state.text}
                 onChange={this.handleChange}
               />
@@ -169,49 +171,114 @@ class Edit extends React.Component {
               <br />
               {this.state.fileUrl && (
                 <span>
-                  Your file: {this.state.fileUrl}
+                  {/* Your file: {this.state.fileUrl} */} File uploaded!
                   <br />
                 </span>
               )}
             </div>
 
-            <label>File</label>
-            <input type="file" onChange={this.handleFile} />
+            {/* <label>File Upload</label>
+            <input type="file" onChange={this.handleFile} /> */}
 
-            <button className="btn btn-primary" type="submit">
-              Upload
-            </button>
-            {/* <button onClick={this.handleDelete}>Delete</button> */}
-            <span>
-              <Link to="/">Generate new</Link>
+            <span class="btn btn-warning btn-file">
+              File Browse <input type="file" onChange={this.handleFile} />
             </span>
+
+            <CopyToClipboard text={window.location.href}>
+              <button type="button" class="btn btn-light" type="submit">
+                Generate URL & Copy to Clipboard
+              </button>
+            </CopyToClipboard>
+            {/* <button className="btn btn-primary" type="submit">
+              Upload
+            </button> */}
+            {/* <button onClick={this.handleDelete}>Delete</button> */}
+
+            <div className="generate-link">
+              <Link to="/">Discard this!</Link>
+            </div>
           </form>
 
           <br />
-          <CopyToClipboard text={window.location.href}>
+          {/* <CopyToClipboard text={window.location.href}>
             <button>Copy URL to the clipboard</button>
-          </CopyToClipboard>
+          </CopyToClipboard> */}
         </div>
       );
     } else {
       return (
-        <div className="read-only">
-          <h2>
-            This Document will self destruct! Once viewed you can not view this
-            note again. If you need access to this information again please copy
-            it to a secure location.
-          </h2>
-          <h5>
+        <div className="container container80 shadow-lg p-5 rounded">
+          <div className="read-only">
+            <div>
+              <h5>
+                This Document will self destruct! Once accessed you can not view
+                this note/file again.
+              </h5>
+            </div>
+            {/* <h5>
             Label:
             {this.state.label}
-          </h5>
-          <h5>Text : {this.state.text}</h5>
+          </h5> */}
 
-          <h5>File :{this.state.fileUrl}</h5>
-          <a href={this.state.fileUrl} target="blank">
-            {this.state.fileUrl}
-          </a>
+            {/* <h5>text: {this.state.text}</h5> */}
+
+            <textarea row="6" size="100" value={this.state.text} />
+            <div class="copy-button ">
+              <CopyToClipboard text={this.state.text}>
+                <button class="btn btn-light">copy text</button>
+              </CopyToClipboard>
+            </div>
+
+            {/* <div className="form-group">
+              <textarea rows="5" size="100" value={this.state.text} />
+            </div> */}
+
+            {/* <h5>File :{this.state.fileUrl}</h5> */}
+
+            <div class="download-file">
+              <a href={this.state.fileUrl} target="blank">
+                <button class="btn btn-warning">Download File</button>
+              </a>
+            </div>
+          </div>
         </div>
+
+        // <div className="read-only">
+        //   <div>
+        //     <h5>
+        //       This Document will self destruct! Once accessed you can not view
+        //       this note/file again.
+        //     </h5>
+        //   </div>
+        //   {/* <h5>
+        //     Label:
+        //     {this.state.label}
+        //   </h5> */}
+
+        //   {/* <h5>text: {this.state.text}</h5> */}
+        //   {/* <div class="client-text center-text">
+        //     <div class="copy-button ">
+        //       <CopyToClipboard text={this.state.text}>
+        //         <button class="btn btn-light">copy text</button>
+        //       </CopyToClipboard>
+        //     </div>
+        //     <div class="txt-area ">
+        //       <textarea size="500" row="10" value={this.state.text} />
+        //     </div>
+        //   </div> */}
+
+        //   <div className="form-group">
+        //     <textarea rows="9" size="300" value={this.state.text} />
+        //   </div>
+
+        //   {/* <h5>File :{this.state.fileUrl}</h5> */}
+
+        //   <div class="download-file">
+        //     <a href={this.state.fileUrl} target="blank">
+        //       <button class="btn btn-warning">Download File</button>
+        //     </a>
+        //   </div>
+        // </div>
       );
     }
   }

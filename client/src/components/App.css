@@ -45,8 +45,17 @@
 
 .container80 {
   width: 60%;
+  color: white;
 }
 
 .foot {
   color: black;
+}
+
+.Link {
+  color: white;
+}
+
+a {
+  color: white;
 }
