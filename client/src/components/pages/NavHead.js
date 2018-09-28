@@ -36,7 +36,7 @@ export default class NavHead extends Component {
       <Navbar className="IronNavbar" dark expand="sm">
         <Container>
           <NavLink className="navbar-brand" to="/">
-            {/* <img src="/images/house.png" alt="logo" /> */}
+            {/* <img src="/images/home1.png" alt="logo" /> */}
             <h4>Home</h4>
           </NavLink>
           <NavbarToggler onClick={this.toggle} />
