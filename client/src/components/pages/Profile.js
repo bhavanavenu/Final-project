@@ -26,7 +26,7 @@ class Profile extends Component {
             </dd>
             <dt style={{ fontSize: 20 }}>How secure is it?</dt>
             <dd>
-              Cipher runs in HTTPS.Once the notes are viewed the encrypted
+              Cipher runs in HTTPS.Once the data are accessed the encrypted
               documents are removed from the system. Pretty secure.
             </dd>
             <dt>How are the documents stored before being read?</dt>
@@ -36,7 +36,7 @@ class Profile extends Component {
               No.The notes are encrypted using a key that is never stored on the
               server. Only the valid URL can display the documents. Once they
               are viewed the encrypted documents are removed from the system and
-              the link can not be viewed again.
+              the link can not be accessed again.
             </dd>
           </dl>
         </div>
