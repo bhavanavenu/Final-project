@@ -26,19 +26,29 @@ class Profile extends Component {
             </dd>
             <dt style={{ fontSize: 20 }}>How secure is it?</dt>
             <dd>
-              Cipher runs in HTTPS.Once the data are accessed the encrypted
-              documents are removed from the system. Pretty secure.
+              Cipher runs on HTTPS. Once the data is accessed by the receiver,
+              the encrypted documents on the backend are removed from the
+              system.
             </dd>
             <dt>How are the documents stored before being read?</dt>
             <dd>The documents are encrypted and put into a database.</dd>
             <dt style={{ fontSize: 20 }}>Can you read the notes?</dt>
             <dd>
-              No.The notes are encrypted using a key that is never stored on the
-              server. Only the valid URL can display the documents. Once they
-              are viewed the encrypted documents are removed from the system and
-              the link can not be accessed again.
+              No. The notes are encrypted using a key that is never stored on
+              the server. Only the valid URL can display the documents. Once
+              they are viewed the encrypted documents are removed from the
+              system and the link can not be accessed again.
             </dd>
           </dl>
+
+          <p>
+            <h5>About Author</h5>
+            Hi, my name is Bhavana Venu, I developed this project for helping
+            anyone to share information anonymously to anyone in a secure way. I
+            am activly improving this application and you can checkout the
+            source the code{" "}
+            <a href="https://github.com/bhavanavenu/Final-project">here</a>.
+          </p>
         </div>
       </div>
     );
