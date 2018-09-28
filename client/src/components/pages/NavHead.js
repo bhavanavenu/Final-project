@@ -60,7 +60,7 @@ export default class NavHead extends Component {
                   <h4>What is this?</h4>
                 </NavLink>
               )}
-              {!api.isLoggedIn() && (
+              {/* {!api.isLoggedIn() && (
                 <Link
                   className={"nav-link"}
                   to="/"
@@ -68,7 +68,7 @@ export default class NavHead extends Component {
                 >
                   Logout
                 </Link>
-              )}
+              )} */}
               <NavItem />
             </Nav>
           </Collapse>

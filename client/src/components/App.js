@@ -30,9 +30,9 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/documents/:id" exact component={Edit} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/profile" component={Profile} />
+            {/* <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} /> */}
+            <Route path="/profile" component={Profile} /> */}
             {/* <Route path="/profile/:id/edit" component={Updateprofile} /> */}
             <Route path="/faq" component={Faq} />
             <Route render={() => <h2>404</h2>} />

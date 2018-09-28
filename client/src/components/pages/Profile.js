@@ -6,14 +6,13 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Faq.css";
-// import { Profile } from "aws-sdk/clients/mediapackage";
 
 class Profile extends Component {
   render() {
     return (
       <div className="container ">
         <div className="faq align-middle mt-5">
-          <h5>Frequency Asked Questions</h5>
+          <h5 style={{ fontSize: 30 }}>Frequency Asked Questions:</h5>
 
           <dl>
             <dt>How secure is Cipher?</dt>
