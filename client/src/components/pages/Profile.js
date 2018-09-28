@@ -11,18 +11,27 @@ class Profile extends Component {
   render() {
     return (
       <div className="container ">
-        <div className="faq align-middle mt-5">
+        <div className="faq align-middle mt-5 shadow-lg p-5 rounded">
           <h5 style={{ fontSize: 30 }}>Frequency Asked Questions:</h5>
 
           <dl>
-            <dt>How secure is Cipher?</dt>
+            <dt style={{ fontSize: 20 }}>What is Cipher?</dt>
+            <dd>
+              If you need to send a password or some other form of simple but
+              sensitive information to someone you can not send it over IM or
+              email. These methods are not secure as anyone with little
+              knowledge can intercept this information during transmission.
+              Using Cipher as the "middle man" you can safely and securely
+              transfer this data to your recipient.
+            </dd>
+            <dt style={{ fontSize: 20 }}>How secure is it?</dt>
             <dd>
               Cipher runs in HTTPS.Once the notes are viewed the encrypted
               documents are removed from the system. Pretty secure.
             </dd>
             <dt>How are the documents stored before being read?</dt>
             <dd>The documents are encrypted and put into a database.</dd>
-            <dt>Can you read the notes?</dt>
+            <dt style={{ fontSize: 20 }}>Can you read the notes?</dt>
             <dd>
               No.The notes are encrypted using a key that is never stored on the
               server. Only the valid URL can display the documents. Once they

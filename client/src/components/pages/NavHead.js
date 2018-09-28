@@ -36,7 +36,7 @@ export default class NavHead extends Component {
       <Navbar className="IronNavbar" dark expand="sm">
         <Container>
           <NavLink className="navbar-brand" to="/">
-            {/* <img src="/images/house-outline.png" alt="logo" /> */}
+            {/* <img src="/images/house.png" alt="logo" /> */}
             <h4>Home</h4>
           </NavLink>
           <NavbarToggler onClick={this.toggle} />
@@ -45,7 +45,7 @@ export default class NavHead extends Component {
               {/* <NavLink className={"nav-link"} to="/">
                 Home
               </NavLink> */}
-              {!api.isLoggedIn() && (
+              {/* {!api.isLoggedIn() && (
                 <NavLink className={"nav-link"} to="/signup">
                   Signup
                 </NavLink>
@@ -53,11 +53,11 @@ export default class NavHead extends Component {
               {!api.isLoggedIn() && (
                 <NavLink className={"nav-link"} to="/login">
                   Login
-                </NavLink>
+                </NavLink> */}
               )}
               {api.isLoggedIn() && (
                 <NavLink className={"nav-link"} to="/profile">
-                  <h4>What is this?</h4>
+                  <h4>FAQs</h4>
                 </NavLink>
               )}
               {/* {!api.isLoggedIn() && (
