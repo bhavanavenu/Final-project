@@ -12,7 +12,7 @@ class Profile extends Component {
     return (
       <div className="container ">
         <div className="faq align-middle mt-5 shadow-lg p-5 rounded">
-          <h5 style={{ fontSize: 30 }}>Frequency Asked Questions:</h5>
+          {/* <h5 style={{ fontSize: 30 }}>Frequency Asked Questions:</h5> */}
 
           <dl>
             <dt style={{ fontSize: 20 }}>What is Cipher?</dt>
@@ -30,7 +30,9 @@ class Profile extends Component {
               the encrypted documents on the backend are removed from the
               system.
             </dd>
-            <dt>How are the documents stored before being read?</dt>
+            <dt style={{ fontSize: 20 }}>
+              How are the documents stored before being read?
+            </dt>
             <dd>The documents are encrypted and put into a database.</dd>
             <dt style={{ fontSize: 20 }}>Can you read the notes?</dt>
             <dd>

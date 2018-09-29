@@ -42,9 +42,9 @@ export default class NavHead extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {/* <NavLink className={"nav-link"} to="/">
-                Home
-              </NavLink> */}
+              <NavLink className={"nav-link"} to="/profile">
+                <h4>FAQs</h4>
+              </NavLink>
               {/* {!api.isLoggedIn() && (
                 <NavLink className={"nav-link"} to="/signup">
                   Signup
@@ -55,11 +55,11 @@ export default class NavHead extends Component {
                   Login
                 </NavLink> */}
               )}
-              {api.isLoggedIn() && (
+              {/* {api.isLoggedIn() && (
                 <NavLink className={"nav-link"} to="/profile">
                   <h4>FAQs</h4>
                 </NavLink>
-              )}
+              )} */}
               {/* {!api.isLoggedIn() && (
                 <Link
                   className={"nav-link"}
