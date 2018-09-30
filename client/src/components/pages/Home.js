@@ -4,7 +4,6 @@ import utils from "../../utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Home.css";
-import Footer from "../pages/Footer";
 
 class Home extends Component {
   constructor(props) {
@@ -28,17 +27,12 @@ class Home extends Component {
           <div style={{ fontSize: 100 }}>Cipher</div>
           <p>Share secrets anonymously without being watched!</p>
 
-          {/* <h1>home - upload</h1> */}
           <button
             className="button btn btn-warning"
             onClick={this.handleUpdate}
           >
             <span class="glyphicon glyphicon-lock" /> share secret
           </button>
-
-          {/* </div>
-        <div className="footer">
-          <Footer /> */}
         </div>
       </div>
     );

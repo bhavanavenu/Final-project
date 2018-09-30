@@ -50,8 +50,8 @@ router.post("/file", uploadCloud.single("file"), (req, res, next) => {
 //update doc
 router.patch("/:id", (req, res, next) => {
   console.log("REQ.BODY -->", req.body);
-  let { label, type, text, fileUrl, key } = req.body;
-  const update = { fileUrl, label, type, text, key };
+  let { text, fileUrl, key } = req.body;
+  const update = { fileUrl, text, key };
   Document.findByIdAndUpdate(req.params.id, update)
     .then(updated => {
       res.json({
@@ -65,9 +65,9 @@ router.patch("/:id", (req, res, next) => {
 //create random url, connected users will be able to see saved items
 router.post("/old", uploadCloud.single("doc"), (req, res, next) => {
   console.log("User --->", req.user);
-  let { label, type, text } = req.body;
+  let { text } = req.body;
 
-  let data = { label, type, text };
+  let data = { text };
   if (req.file) {
     data.publicId = req.file.public_id;
     console.log("DEBUG data.publicId", data.publicId);
@@ -98,9 +98,6 @@ router.get("/:id/:randomUrl", (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
-// //delete document from db
-//router.delete("/:id/:random", (req, res, next) => {});
 
 //delete docs if we upload wrong
 router.delete("/:id", (req, res, next) => {

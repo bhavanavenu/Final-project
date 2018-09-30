@@ -1,5 +1,5 @@
 import axios from "axios";
-//import Upload from "./components/pages/Upload";
+
 const service = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
@@ -48,13 +48,6 @@ export default {
   },
 
   updateDocument(docId, data) {
-    // const formData = new FormData();
-    // //formData.append("doc", "document");
-    // // formData.append("file", data.file);
-    // formData.append("label", data.label);
-    // formData.append("type", data.type);
-    // formData.append("text", data.text);
-
     return service
       .patch("/documents/" + docId, data)
       .then(res => res.data)
@@ -63,13 +56,6 @@ export default {
   getProfile() {
     return service.get("/profile").then(res => res.data);
   },
-
-  // getProfile(username) {
-  //   return service
-  //     .get("/profile/" + username)
-  //     .then(res => res.data)
-  //     .catch(errHandler);
-  // },
 
   updateProfile(id, data) {
     return service
@@ -109,17 +95,6 @@ export default {
     localStorage.removeItem("user");
     return service.get("/logout");
   },
-
-  // loadUser() {
-  //   const userData = localStorage.getItem('user');
-  //   if (!userData) return false;
-  //   const user = JSON.parse(userData);
-  //   if (user.token) {
-  //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
-  //     return user;
-  //   }
-  //   return false;
-  // },
 
   isLoggedIn() {
     console.log(localStorage.getItem("user") != null);

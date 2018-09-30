@@ -28,7 +28,6 @@ var uploadCloud = multer({
     // Set key/ filename as original uploaded name
     key: function(req, file, cb) {
       cb(null, "file" + Math.floor(Math.random() * 1000000000));
-      // cb(null, file.originalname);
     }
   })
 });

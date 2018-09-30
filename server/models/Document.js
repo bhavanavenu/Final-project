@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const documentSchema = new Schema({
   label: {
     type: String,
-    // required: true,
+
     default: ""
   },
   type: {
@@ -15,7 +15,7 @@ const documentSchema = new Schema({
   },
   text: {
     type: String,
-    // required: true,
+
     default: ""
   },
   fileUrl: {
@@ -23,9 +23,7 @@ const documentSchema = new Schema({
     default: ""
   },
   key: String,
-  // randomUrl: {
-  //   type: String
-  // },
+
   _owner: { type: Schema.Types.ObjectId, ref: "User" }
 });
 

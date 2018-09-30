@@ -42,33 +42,9 @@ export default class NavHead extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavLink className={"nav-link"} to="/profile">
+              <NavLink className={"nav-link"} to="/faq">
                 <h4>FAQs</h4>
               </NavLink>
-              {/* {!api.isLoggedIn() && (
-                <NavLink className={"nav-link"} to="/signup">
-                  Signup
-                </NavLink>
-              )}
-              {!api.isLoggedIn() && (
-                <NavLink className={"nav-link"} to="/login">
-                  Login
-                </NavLink> */}
-              )}
-              {/* {api.isLoggedIn() && (
-                <NavLink className={"nav-link"} to="/profile">
-                  <h4>FAQs</h4>
-                </NavLink>
-              )} */}
-              {/* {!api.isLoggedIn() && (
-                <Link
-                  className={"nav-link"}
-                  to="/"
-                  onClick={e => this.handleLogoutClick(e)}
-                >
-                  Logout
-                </Link>
-              )} */}
               <NavItem />
             </Nav>
           </Collapse>
