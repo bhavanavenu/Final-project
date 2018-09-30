@@ -6,4 +6,19 @@
 
 visit: https://ih-cipher.herokuapp.com
 
-### Author : Bhavana Venu
+## Stack:
+
+### Front-end
+
+1. React JS
+2. CSS/Boostrap
+
+### Back-end
+
+1. NodeJS/Express
+2. MongoDB
+
+### Infra
+
+1. Heroku
+2. AWS S3
