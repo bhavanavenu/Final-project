@@ -41,7 +41,7 @@ Screenshot of the page where user can generate link to share secrets/files
 
 5. cd .. && npm install
 
-## have two terminal windows open, one for client and server
+#### have two terminal windows open, one for client and server
 
 1. Run server as, npm run dev
 
@@ -49,4 +49,4 @@ Screenshot of the page where user can generate link to share secrets/files
 
 Open browser with http://localhost:3000
 
-## Feel free to contribute to this project anytime.
+#### Feel free to contribute to this project anytime.
