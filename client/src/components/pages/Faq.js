@@ -8,7 +8,7 @@ class Faq extends Component {
     return (
       <div className="container ">
         <div className="faq align-middle mt-5 shadow-lg p-3 rounded">
-          <h2 style={{ fontSize: 26 }}>What is Cipher?</h2>
+          <h2 style={{ fontSize: 22 }}>What is Cipher?</h2>
 
           <p>
             If you need to send a password or some other form of simple but
@@ -19,17 +19,17 @@ class Faq extends Component {
             your recipient.
           </p>
 
-          <h2 style={{ fontSize: 26 }}>How secure is it?</h2>
+          <h2 style={{ fontSize: 22 }}>How secure is it?</h2>
           <p>
             Cipher runs on HTTPS. Once the data is accessed by the receiver, the
             encrypted documents on the backend are removed from the system.
           </p>
 
-          <h2 style={{ fontSize: 26 }}>
+          <h2 style={{ fontSize: 22 }}>
             How are the documents stored before being read?
           </h2>
           <p>The documents are encrypted and put into a database.</p>
-          <h2 style={{ fontSize: 26 }}>Can you read the notes?</h2>
+          <h2 style={{ fontSize: 22 }}>Can you read the notes?</h2>
           <p>
             No. The notes are encrypted using a key that is never stored on the
             server. Only the valid URL can display the documents. Once they are
@@ -37,13 +37,13 @@ class Faq extends Component {
             link can not be accessed again.
           </p>
 
-          <h2 style={{ fontSize: 26 }}>About Author</h2>
+          <h2 style={{ fontSize: 22 }}>About Author</h2>
           <p>
             Hi, my name is Bhavana Venu, I developed this project for helping
             anyone to share information anonymously to anyone in a secure way. I
             am activly improving this application and you can checkout the
             source the code{" "}
-            <a href="https://github.com/bhavanavenu/Final-project">here</a>.
+            <a href="https://github.com/bhavanavenu/cipher">here</a>.
           </p>
         </div>
       </div>
